@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header(title)">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title th:text="${title}">Electro - HTML Ecommerce Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+
+   <!-- MAIN CONTENT -->
+<div th:fragment="ConteudoCamisas(camisa)">
+    <div id="breadcrumb" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="breadcrumb-header">PÁGINA PRINCIPAL</h3>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div th:each="camisas: ${camisa}">
+                    <div th:if="${camisas.isDeleted == null}" class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img th:src="@{'/img/' + ${camisas.imageUri}}" alt="imagem"/>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name" th:text="${camisas.nome}"></h3>
+                                <p class="product-category" th:text="${camisas.descricao}"></p>
+                                <h4 class="product-price" th:text="${camisas.preco}"></h4>
+                                <div class="add-to-cart">
+                                    <a th:href="@{'/adicionarCarrinho/'+${camisas.id}}" class="add-to-cart-btn">
+                                        <i class="fa fa-shopping-cart"></i> adicionar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MAIN CONTENT -->
+
+     
+<!-- MAIN CONTENT -->
+<div th:fragment="ConteudoCamisasAdmin(Camisas)">
+    <div id="breadcrumb" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="breadcrumb-header">PÁGINA DE ADMIN</h3>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div th:each="camisa: ${Camisas}">
+                    <div th:if="${camisa.isDeleted == null}" class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img th:src="@{'/img/' + ${camisa.imageUri}}" alt="imagem"/>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name" th:text="${camisa.nome}"></h3>
+                                <p class="product-category" th:text="${camisa.descricao}"></p>
+                                <h4 class="product-price" th:text="${camisa.preco}"></h4>
+                                <div class="add-to-cart">
+                                    <a th:href="@{'/editar/'+${camisa.id}}" class="add-to-cart-btn">
+                                        <i class="fa fa-edit"></i> Editar
+                                    </a>
+                                    <a th:href="@{'/deletar/'+${camisa.id}}" class="add-to-cart-btn">
+                                        <i class="fa fa-trash"></i> Remover
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MAIN CONTENT -->
+
+<!-- MAIN CONTENT -->
+<div th:fragment="verCarrinho(Carrinho)">
+    <div id="breadcrumb" class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="breadcrumb-header">PÁGINA DE CARRINHO</h3>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div th:each="carrinho: ${Carrinho}">
+                    <div th:if="${carrinho.isDeleted == null}" class="col-md-4 col-xs-6">
+                        <div class="product">
+                            <div class="product-img">
+                                <img th:src="@{'/img/' + ${carrinho.imageUri}}" alt="imagem"/>
+                            </div>
+                            <div class="product-body">
+                                <h3 class="product-name" th:text="${carrinho.nome}"></h3>
+                                <p class="product-category" th:text="${carrinho.descricao}"></p>
+                                <h4 class="product-price" th:text="${carrinho.preco}"></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /MAIN CONTENT -->
+
+<!-- HEADER -->
+<div th:fragment="cabecalho">
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <span th:text="${remoteUser}"></span>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <div class="container">
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <img width="200px" src="./img/boxloja-logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-9 clearfix">
+                        <div class="header-ctn pull-right">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <a href="/verCarrinho">ver carrinho <span th:text="${carrinhoSize}"></span></a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+            </div>
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+</div>
+<!-- /HEADER -->
+
+
+<!-- HEADER -->
+<div th:fragment="cabecalhoAdmin">
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <span th:text="${remoteUser}"></span>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <div class="container">
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <img width="200px" src="./img/boxloja-logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-9 clearfix">
+                        <div class="header-ctn pull-right">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                   
+                                    <a href="/cadastro">cadastro</a>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+            </div>
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+</div>
+<!-- /HEADER -->
+
+
+<!-- HEADER -->
+<div th:fragment="cabecalhoCarrinho">
+    <header>
+        <!-- TOP HEADER -->
+        <div id="top-header">
+            <div class="container">
+                <ul class="header-links pull-left">
+                    <span th:text="${remoteUser}"></span>
+                    <li><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /TOP HEADER -->
+
+        <!-- MAIN HEADER -->
+        <div id="header">
+            <div class="container">
+                <div class="row">
+                    <!-- LOGO -->
+                    <div class="col-md-3">
+                        <div class="header-logo">
+                            <a href="#" class="logo">
+                                <img width="200px" src="./img/boxloja-logo.png" alt="">
+                            </a>
+                        </div>
+                    </div>
+                    <!-- /LOGO -->
+
+                    <!-- ACCOUNT -->
+                    <div class="col-md-9 clearfix">
+                        <div class="header-ctn pull-right">
+                            <div class="dropdown">
+                                <a href="/finalizarCompra"><i class="fa fa-dollar"></i>finalizarCompra</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+            </div>
+        </div>
+        <!-- /MAIN HEADER -->
+    </header>
+</div>
+<!-- /HEADER -->
+
+
+<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+
+  <div th:fragment="footer">
+    <footer id="footer">
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <!-- Information -->
+                    <div class="col-md-3 col-xs-6">
+                        <div class="footer">
+                            <h3 class="footer-title">Informações</h3>
+                            <ul class="footer-links">
+                                <li><a href="#">Sobre nós</a></li>
+                                <li><a href="#">Contate-nos</a></li>
+                                <li><a href="#">Política de Privacidade</a></li>
+                                <li><a href="#">Pedidos e Devoluções</a></li>
+                                <li><a href="#">Termos e Condições</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /Information -->
+                </div>
+            </div>
+         </div>
+  </div>
+
+</body>
+
+</html>

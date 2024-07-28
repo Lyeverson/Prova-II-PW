@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{${#servletContext.contextPath}/css/style.css}">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <div class="section-title">
+            <h3 class="title">Cadastro de Camisa</h3>
+        </div>
+        <form th:object="${Camisa}" method="post" th:action="@{/salvar}" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input class="input" type="text" id="nome" th:field="*{nome}"/>
+                <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label for="preco">Preço</label>
+                <input class="input" type="number" id="preco" th:field="*{preco}"/>
+                <span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label for="descricao">Descrição</label>
+                <input class="input" type="text" id="descricao" th:field="*{descricao}"/>
+                <span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label for="material">Material</label>
+                <input class="input" type="text" id="material" th:field="*{material}"/>
+                <span th:if="${#fields.hasErrors('material')}" th:errors="*{material}" style="color: red"></span>
+            </div>
+            <div class="form-group">
+                <label for="file">Imagem</label>
+                <input class="input" type="file" id="file" name="file">
+            </div>
+            <button class="primary-btn order-submit" type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>
